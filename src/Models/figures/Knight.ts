@@ -1,10 +1,10 @@
 import {Figure, FigureNames} from "./Figure";
-import {Colors} from "../Colors";
-import blackIcon from '../../assets/chessIcons/black-bishop.png';
-import whiteIcon from '../../assets/chessIcons/white-bishop.png';
 import {CellModel} from "../CellModel";
+import {Colors} from "../Colors";
+import whiteIcon from "../../assets/chessIcons/white-knight.png";
+import blackIcon from "../../assets/chessIcons/black-knight.png";
 
-export class Bishop extends Figure {
+export class Knight extends Figure {
 
     constructor(color: Colors, cell: CellModel) {
         super(color, cell);

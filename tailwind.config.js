@@ -5,6 +5,7 @@ module.exports = {
     colors: {
       'CellHonest': '#EEEED2',
       'CellOdd': '#769656',
+      'CellSelected': '#BACA2B',
     }
   },
   plugins: [],

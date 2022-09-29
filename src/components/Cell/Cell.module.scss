@@ -1,0 +1,15 @@
+.cell {
+  @apply w-[95px] h-[95px] flex justify-center items-center
+}
+
+.cell__color_honest {
+  @apply bg-CellHonest
+}
+
+.cell__color_odd {
+  @apply bg-CellOdd
+}
+
+.cell__selected {
+  @apply bg-CellSelected
+}
