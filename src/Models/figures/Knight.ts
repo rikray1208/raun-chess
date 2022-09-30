@@ -11,4 +11,20 @@ export class Knight extends Figure {
         this.name = FigureNames.BISHOP
         this.image = color === Colors.WHITE ? whiteIcon : blackIcon
     }
+
+    canMove(targetCell: CellModel): boolean {
+
+        if (!super.canMove(targetCell)) {
+            return false
+        }
+
+        const abcX = Math.abs(this.cell.x - targetCell.x);
+        const abcY = Math.abs(this.cell.y - targetCell.y);
+
+        if ((abcX === 1 && abcY === 2) || (abcY === 1 && abcX === 2)) {
+            return true
+        }
+
+        return false;
+    }
 }

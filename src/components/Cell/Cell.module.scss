@@ -1,5 +1,9 @@
 .cell {
-  @apply w-[95px] h-[95px] flex justify-center items-center
+  @apply w-[95px] h-[95px] flex justify-center items-center relative
+}
+
+.cell__figure {
+  @apply relative z-20
 }
 
 .cell__color_honest {
@@ -12,4 +16,12 @@
 
 .cell__selected {
   @apply bg-CellSelected
+}
+
+.cell__available {
+ @apply w-[95px] h-[95px] rounded-[50px] border-8 border-[#D1D3B7] absolute z-10 opacity-20
+}
+
+.dot {
+  @apply w-5 h-5 rounded-[50px] bg-[#D1D3B7]
 }

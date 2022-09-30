@@ -5,7 +5,7 @@ import classes from './Cell.module.scss'
 
 type CellProps = {
     cell: CellModel,
-    selectedCell: boolean,
+        selectedCell: boolean,
     setSelectedCell: (cell: CellModel) => void
 }
 
@@ -26,10 +26,15 @@ const Cell: FC<CellProps> = ({cell, setSelectedCell, selectedCell}) => {
     }
 
     return (
-        <div className={`${cellStyles()} ${cellSelected()}`} onClick={() => setSelectedCell(cell)}>
+        <div
+            className={`${cellStyles()} ${cellSelected()}`}
+            onClick={() => setSelectedCell(cell)}
+        >
             {cell?.figure &&
-                <img width='64px' height='64px' alt='figure' src={cell.figure.image}/>
+                <img className={classes.cell__figure} alt='figure' src={cell.figure.image}/>
             }
+            {cell.available && cell.figure && <div className={classes.cell__available}/>}
+            {!cell?.figure && cell.available && <div className={classes.dot}/>}
         </div>
     );
 };

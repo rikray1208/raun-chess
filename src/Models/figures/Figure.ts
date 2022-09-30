@@ -28,10 +28,19 @@ export class Figure {
     }
 
     canMove(targetCell: CellModel) : boolean {
+        if (this.color === targetCell.figure?.color) {
+            return false
+        }
+
+        if(targetCell.figure?.name === FigureNames.KING) {
+            return false
+        }
+
         return true
     }
 
-    moveFigure(targetCell: CellModel) {
+    public  moveFigure(targetCell: CellModel) {
 
     }
+
 }

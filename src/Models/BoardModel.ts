@@ -6,19 +6,20 @@ import {Knight} from "./figures/Knight";
 import {Pawn} from "./figures/Pawn";
 import {Queen} from "./figures/Queen";
 import {Rook} from "./figures/Rook";
+import {FigureNames} from "./figures/Figure";
 
 
 export class BoardModel {
     cells: CellModel[][] = []
 
     public initCells() {
-        for (let x = 0; x < 8; x++) {
+        for (let i = 0; i < 8; i++) {
             const row: CellModel[] = [];
-            for (let y = 0; y < 8; y++) {
-                if ((x + y) % 2 === 0) {
-                    row.push( new CellModel(this, x, y, Colors.HONEST, null))   // HONEST
+            for (let j = 0; j < 8; j++) {
+                if ((i + j) % 2 === 0) {
+                    row.push( new CellModel(this, j, i, Colors.HONEST, null))   // HONEST
                 } else {
-                    row.push( new CellModel(this, x, y, Colors.ODD, null) ) // ODD
+                    row.push( new CellModel(this, j, i, Colors.ODD, null) ) // ODD
                 }
             }
 
@@ -26,8 +27,27 @@ export class BoardModel {
         }
     }
 
-    public getCell(x: number, y: number) {
-        return this.cells[x][y]
+    public setAvailableCells(selectedCell: CellModel | null) {
+        for (let i = 0; i < 8; i++) {
+            const row = this.cells[i];
+
+            for (let j = 0; j < 8; j++) {
+                const currentCell = row[j];
+                currentCell.available = !!selectedCell?.figure?.canMove(currentCell)
+            }
+        }
+    }
+
+    public getCopy(): BoardModel {
+            const newBoard = new BoardModel()
+            newBoard.cells = this.cells
+
+            return newBoard
+    }
+
+
+    public getCell(i: number, j: number) {
+        return this.cells[i][j]
     }
 
     private addBishop() {
@@ -51,9 +71,9 @@ export class BoardModel {
     }
 
     private addPawn() {
-        for (let i = 0; i < 8; i++) {
-            new Pawn(Colors.WHITE, this.getCell(1, i))
-            new Pawn(Colors.BLACK, this.getCell(6, i))
+        for (let j = 0; j < 8; j++) {
+            new Pawn(Colors.WHITE, this.getCell(1, j))
+            new Pawn(Colors.BLACK, this.getCell(6, j))
         }
 
     }
