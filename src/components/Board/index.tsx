@@ -2,23 +2,27 @@ import React, {FC, Fragment, useEffect, useState} from 'react';
 import {BoardModel} from "../../Models/BoardModel";
 import Cell from "../Cell";
 import {CellModel} from "../../Models/CellModel";
+import {Player} from "../../Models/Player";
 
 
 type BoardProps = {
     board: BoardModel,
-    setBoard: (board: BoardModel) => void
+    setBoard: (board: BoardModel) => void,
+    player: Player | null,
+    swapPlayer: () => void
 }
 
-const Board: FC<BoardProps> = ({board, setBoard}) => {
+const Board: FC<BoardProps> = ({board, setBoard, player, swapPlayer}) => {
     const [selectedCell, setSelectedCell] = useState<CellModel | null>(null)
 
     function click(currentCell: CellModel) {
         if(selectedCell && selectedCell !== currentCell && selectedCell.figure?.canMove(currentCell)) {
             selectedCell.moveFigure(currentCell);
+            swapPlayer()
             setSelectedCell(null);
 
         } else   {
-            if( currentCell?.figure ) {
+            if( currentCell?.figure && currentCell.figure.color === player?.color ) {
                 setSelectedCell(currentCell)
             }
         }

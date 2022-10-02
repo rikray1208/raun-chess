@@ -8,7 +8,7 @@ export class Rook extends Figure {
 
     constructor(color: Colors, cell: CellModel) {
         super(color, cell);
-        this.name = FigureNames.BISHOP
+        this.name = FigureNames.ROOK
         this.image = color === Colors.WHITE ? whiteIcon : blackIcon
     }
 

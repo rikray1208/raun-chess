@@ -51,43 +51,43 @@ export class BoardModel {
     }
 
     private addBishop() {
-        new Bishop(Colors.WHITE, this.getCell(0,2))
-        new Bishop(Colors.WHITE, this.getCell(0,5))
-        new Bishop(Colors.BLACK, this.getCell(7,5))
-        new Bishop(Colors.BLACK, this.getCell(7,2))
+        new Bishop(Colors.BLACK, this.getCell(0,2))
+        new Bishop(Colors.BLACK, this.getCell(0,5))
+        new Bishop(Colors.WHITE, this.getCell(7,5))
+        new Bishop(Colors.WHITE, this.getCell(7,2))
     }
 
     private addKing() {
-        new King(Colors.WHITE, this.getCell(0, 3))
-        new King(Colors.BLACK, this.getCell(7, 3))
+        new King(Colors.BLACK, this.getCell(0, 3))
+        new King(Colors.WHITE, this.getCell(7, 3))
     }
 
     private addKnight() {
-        new Knight(Colors.WHITE, this.getCell(0, 1))
-        new Knight(Colors.WHITE, this.getCell(0, 6))
-        new Knight(Colors.BLACK, this.getCell(7, 1))
-        new Knight(Colors.BLACK, this.getCell(7, 6))
+        new Knight(Colors.BLACK, this.getCell(0, 1))
+        new Knight(Colors.BLACK, this.getCell(0, 6))
+        new Knight(Colors.WHITE, this.getCell(7, 1))
+        new Knight(Colors.WHITE, this.getCell(7, 6))
 
     }
 
     private addPawn() {
         for (let j = 0; j < 8; j++) {
-            new Pawn(Colors.WHITE, this.getCell(1, j))
-            new Pawn(Colors.BLACK, this.getCell(6, j))
+            new Pawn(Colors.BLACK, this.getCell(1, j))
+            new Pawn(Colors.WHITE, this.getCell(6, j))
         }
 
     }
 
     private addQueen() {
-        new Queen(Colors.WHITE, this.getCell(0, 4))
-        new Queen(Colors.BLACK, this.getCell(7, 4))
+        new Queen(Colors.BLACK, this.getCell(0, 4))
+        new Queen(Colors.WHITE, this.getCell(7, 4))
     }
 
     private addRook() {
-        new Rook(Colors.WHITE, this.getCell(0, 0))
-        new Rook(Colors.WHITE, this.getCell(0, 7))
-        new Rook(Colors.BLACK, this.getCell(7, 0))
-        new Rook(Colors.BLACK, this.getCell(7, 7))
+        new Rook(Colors.BLACK, this.getCell(0, 0))
+        new Rook(Colors.BLACK, this.getCell(0, 7))
+        new Rook(Colors.WHITE, this.getCell(7, 0))
+        new Rook(Colors.WHITE, this.getCell(7, 7))
     }
 
     public addFigures() {

@@ -27,6 +27,14 @@ export class Figure {
         this.id = Math.random()
     }
 
+    kingUnderAttack(targetCell: CellModel) {
+        if (targetCell.figure?.name === FigureNames.KING) {
+            console.log('king')
+
+        }
+        return false
+    }
+
     canMove(targetCell: CellModel) : boolean {
         if (this.color === targetCell.figure?.color) {
             return false
@@ -35,6 +43,7 @@ export class Figure {
         if(targetCell.figure?.name === FigureNames.KING) {
             return false
         }
+
 
         return true
     }

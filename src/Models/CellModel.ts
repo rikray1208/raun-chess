@@ -90,5 +90,6 @@ export class CellModel {
             this.figure = null;
 
         }
+
     }
 }

@@ -8,7 +8,7 @@ export class Queen extends Figure {
 
     constructor(color: Colors, cell: CellModel) {
         super(color, cell);
-        this.name = FigureNames.BISHOP
+        this.name = FigureNames.QUEEN
         this.image = color === Colors.WHITE ? whiteIcon : blackIcon
     }
 
@@ -18,16 +18,8 @@ export class Queen extends Figure {
             return false
         }
 
-        if (this.cell.isEmptyVertical(targetCell)) {
+        if (this.cell.isEmptyVertical(targetCell) || this.cell.isEmptyHorizontal(targetCell) || this.cell.isEmptyDiagonal(targetCell)) {
             return true;
-        }
-
-        if (this.cell.isEmptyHorizontal(targetCell)) {
-            return true;
-        }
-
-        if(this.cell.isEmptyDiagonal(targetCell)) {
-            return true
         }
 
         return false

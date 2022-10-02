@@ -8,7 +8,7 @@ export class Knight extends Figure {
 
     constructor(color: Colors, cell: CellModel) {
         super(color, cell);
-        this.name = FigureNames.BISHOP
+        this.name = FigureNames.KNIGHT
         this.image = color === Colors.WHITE ? whiteIcon : blackIcon
     }
 

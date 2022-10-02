@@ -17,6 +17,16 @@ export class King extends Figure {
         if (!super.canMove(targetCell)) {
             return false
         }
-        return true;
+
+        const horizontalCheck = targetCell.x === this.cell.x  && (targetCell.y === this.cell.y - 1 || targetCell.y === this.cell.y + 1);
+        const verticalCheck = targetCell.y === this.cell.y  && (targetCell.x === this.cell.x - 1 || targetCell.x === this.cell.x + 1);
+        const diagonalCheck = (targetCell.y === this.cell.y + 1 || targetCell.y === this.cell.y - 1 )&& (targetCell.x === this.cell.x + 1 || targetCell.x === this.cell.x - 1)
+
+        if (horizontalCheck || verticalCheck || diagonalCheck) {
+            return true
+        }
+
+
+        return false;
     }
 }

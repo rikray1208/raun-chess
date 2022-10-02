@@ -19,10 +19,21 @@ export class Pawn extends Figure {
             return false
         }
 
-        if(this.isFirst && this.cell.x === targetCell.x  && this.cell.y === targetCell.y + 2) {
-            return true
+        const direction = this.color === 'black' ? 1 : -1;
+        const firstDirection = this.color === 'black' ? 2 : -2;
+
+        const offsetCheck = (targetCell.y === this.cell.y + direction) || (this.isFirst && (targetCell.y === this.cell.y + firstDirection));
+        const horizontalCheck = targetCell.x === this.cell.x;
+        const isEmptyCheck = this.cell.board.getCell(targetCell.y, targetCell.x).isEmpty();
+
+        const abcX = Math.abs(this.cell.x - targetCell.x);
+        const abcY = Math.abs(this.cell.y - targetCell.y);
+
+        if ( offsetCheck && horizontalCheck && isEmptyCheck ) {
+            return true;
         }
-        if(!this.isFirst && this.cell.x === targetCell.x  && this.cell.y === targetCell.y + 1) {
+
+        if( abcX === abcY &&  abcX === 1 && offsetCheck && !isEmptyCheck ) {
             return true
         }
 
