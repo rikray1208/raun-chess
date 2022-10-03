@@ -81,6 +81,7 @@ export class CellModel {
     public setFigure(figure: Figure) {
         this.figure = figure;
         this.figure.cell = this;
+        this.board.saveLastFigure(figure)
     }
 
     public moveFigure(targetCell: CellModel) {

@@ -23,6 +23,12 @@ export class King extends Figure {
         const diagonalCheck = (targetCell.y === this.cell.y + 1 || targetCell.y === this.cell.y - 1 )&& (targetCell.x === this.cell.x + 1 || targetCell.x === this.cell.x - 1)
 
         if (horizontalCheck || verticalCheck || diagonalCheck) {
+            const available = this.cell.board.lastAvailableCells;
+            const isCellOnAvailable = available.find(el => el === targetCell && targetCell.figure !== this.cell.board.lastFigure)
+
+            if( this.isKingUnderAttack() && isCellOnAvailable) {
+                return false
+            }
             return true
         }
 

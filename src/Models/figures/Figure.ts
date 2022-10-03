@@ -27,13 +27,20 @@ export class Figure {
         this.id = Math.random()
     }
 
-    kingUnderAttack(targetCell: CellModel) {
-        if (targetCell.figure?.name === FigureNames.KING) {
-            console.log('king')
+    public isKingUnderAttack(): boolean {
+        const lastAvailableCells = this.cell.board.lastAvailableCells
 
-        }
-        return false
+        const isUnderAttack = !!lastAvailableCells.find(el => el.figure?.name === FigureNames.KING);
+        // console.log(!!lastAvailableCells.find(el => el.figure?.name === FigureNames.KING))
+        //
+        // if(isUnderAttack) {
+        //     console.log(isUnderAttack + ' корольк под атакой')
+        //     return !!lastAvailableCells.find(el => el !== targetCell || targetCell.figure === this.cell.board.lastFigure)
+        // }
+
+        return isUnderAttack
     }
+
 
     canMove(targetCell: CellModel) : boolean {
         if (this.color === targetCell.figure?.color) {
@@ -41,10 +48,8 @@ export class Figure {
         }
 
         if(targetCell.figure?.name === FigureNames.KING) {
-            return false
+            return true
         }
-
-
         return true
     }
 
