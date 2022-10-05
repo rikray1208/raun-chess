@@ -1,41 +1,19 @@
-import React, {useEffect, useState} from 'react';
-import Board from "./components/Board";
-import {BoardModel} from "./Models/BoardModel";
-import {Player} from "./Models/Player";
-import {Colors} from "./Models/Colors";
+import React from 'react';
+import {Navigate, Route, Routes} from "react-router-dom";
+import GamePage from "./pages/GamePage";
+import AuthPage from "./pages/AuthPage";
 
 function App() {
-    const [board, setBoard] = useState(new BoardModel());
-    const [whitePlayer, setWhitePlayer] = useState<Player>(new Player(Colors.WHITE));
-    const [blackPlayer, setBlackPlayer] = useState<Player>(new Player(Colors.BLACK));
-    const [currentPlayer, setCurrentPlayer] = useState<Player | null>(null);
-
-    useEffect(() => {
-        createBoard();
-        setCurrentPlayer(whitePlayer)
-    }, [])
-
-    function createBoard() {
-        const newBoard = new BoardModel();
-        newBoard.initCells();
-        newBoard.addFigures()
-        setBoard(newBoard)
-
-    }
-
-    function swapPlayer() {
-        setCurrentPlayer(currentPlayer?.color === Colors.WHITE ? blackPlayer : whitePlayer )
-    }
+    const isAuth = true;
 
     return (
-    <div className="flex justify-center items-center h-screen w-[100wh]">
-        <Board
-            board={board}
-            setBoard={setBoard}
-            player={currentPlayer}
-            swapPlayer={swapPlayer}
-        />
-    </div>
+        <Routes>
+            <Route path='/auth' element={<AuthPage />} />
+            {isAuth &&
+                <Route path='/chess' element={<GamePage />} />
+            }
+            <Route path="*" element={<Navigate to="/auth"/>}/>
+        </Routes>
   );
 }
 

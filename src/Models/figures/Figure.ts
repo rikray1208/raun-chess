@@ -27,28 +27,13 @@ export class Figure {
         this.id = Math.random()
     }
 
-    public isKingUnderAttack(): boolean {
-        const lastAvailableCells = this.cell.board.lastAvailableCells
-
-        const isUnderAttack = !!lastAvailableCells.find(el => el.figure?.name === FigureNames.KING);
-        // console.log(!!lastAvailableCells.find(el => el.figure?.name === FigureNames.KING))
-        //
-        // if(isUnderAttack) {
-        //     console.log(isUnderAttack + ' корольк под атакой')
-        //     return !!lastAvailableCells.find(el => el !== targetCell || targetCell.figure === this.cell.board.lastFigure)
-        // }
-
-        return isUnderAttack
-    }
-
-
-    canMove(targetCell: CellModel) : boolean {
+    canMove(targetCell: CellModel, flag?: boolean) : boolean {
         if (this.color === targetCell.figure?.color) {
             return false
         }
 
         if(targetCell.figure?.name === FigureNames.KING) {
-            return true
+            return false
         }
         return true
     }

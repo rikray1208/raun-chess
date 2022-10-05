@@ -18,20 +18,18 @@ export class King extends Figure {
             return false
         }
 
-        const horizontalCheck = targetCell.x === this.cell.x  && (targetCell.y === this.cell.y - 1 || targetCell.y === this.cell.y + 1);
-        const verticalCheck = targetCell.y === this.cell.y  && (targetCell.x === this.cell.x - 1 || targetCell.x === this.cell.x + 1);
-        const diagonalCheck = (targetCell.y === this.cell.y + 1 || targetCell.y === this.cell.y - 1 )&& (targetCell.x === this.cell.x + 1 || targetCell.x === this.cell.x - 1)
+        const abcX = Math.abs(this.cell.x - targetCell.x);
+        const abcY = Math.abs(this.cell.y - targetCell.y);
 
-        if (horizontalCheck || verticalCheck || diagonalCheck) {
-            const available = this.cell.board.lastAvailableCells;
-            const isCellOnAvailable = available.find(el => el === targetCell && targetCell.figure !== this.cell.board.lastFigure)
-
-            if( this.isKingUnderAttack() && isCellOnAvailable) {
+        if(abcX < 2 && abcY < 2 && abcX + abcY > 0 ) {
+            const arr = this.cell.cellsUnderAttack.find(el => el === targetCell)
+            console.log(arr)
+            if (!!arr) {
                 return false
             }
-            return true
-        }
 
+            return true;
+        }
 
         return false;
     }

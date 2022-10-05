@@ -1,6 +1,6 @@
 import {Colors} from "./Colors";
 import {BoardModel} from "./BoardModel";
-import {Figure} from "./figures/Figure";
+import {Figure, FigureNames} from "./figures/Figure";
 
 export class CellModel {
     readonly x: number
@@ -10,6 +10,7 @@ export class CellModel {
     figure: Figure | null
     id: number
     available: boolean
+    cellsUnderAttack: CellModel[] = [];
 
     constructor(board: BoardModel, x: number, y: number, color: Colors, figure: Figure | null) {
         this.x = x;
@@ -26,7 +27,7 @@ export class CellModel {
     }
 
 
-    isEmptyVertical(targetCell: CellModel): boolean {
+    isEmptyVertical(targetCell: CellModel, flag?: boolean): boolean {
         if (this.x !== targetCell.x) {
             return false
         }
@@ -34,7 +35,7 @@ export class CellModel {
          const max = Math.max(this.y, targetCell.y);
 
          for (let y = min + 1; y < max; y++){
-             if (!this.board.getCell(y, this.x).isEmpty()) {
+             if ( !flag && !this.board.getCell(y, this.x).isEmpty() ) {
                  return false
              }
          }
@@ -42,7 +43,7 @@ export class CellModel {
          return true
     }
 
-    isEmptyHorizontal(targetCell: CellModel): boolean {
+    isEmptyHorizontal(targetCell: CellModel, flag?: boolean): boolean {
         if (this.y !== targetCell.y) {
             return false
         }
@@ -50,7 +51,7 @@ export class CellModel {
         const max = Math.max(this.x, targetCell.x);
 
         for (let x = min + 1; x < max; x++){
-            if (!this.board.getCell(this.y, x).isEmpty()) {
+            if (!flag && !this.board.getCell(this.y, x).isEmpty()) {
                 return false
             }
         }
@@ -58,7 +59,7 @@ export class CellModel {
         return true
     }
 
-    isEmptyDiagonal(targetCell: CellModel): boolean {
+    isEmptyDiagonal(targetCell: CellModel, flag?: boolean): boolean {
         const absX = Math.abs(this.x - targetCell.x);
         const absY = Math.abs(this.y - targetCell.y);
 
@@ -70,7 +71,7 @@ export class CellModel {
        const dy = this.y < targetCell.y ? 1 : -1;
 
        for (let i = 1; i < absY; i++) {
-           if (!this.board.getCell(this.y + dy * i, this.x + dx * i).isEmpty()) {
+           if (!flag && !this.board.getCell(this.y + dy * i, this.x + dx * i).isEmpty()) {
                return false
            }
        }
@@ -81,15 +82,41 @@ export class CellModel {
     public setFigure(figure: Figure) {
         this.figure = figure;
         this.figure.cell = this;
-        this.board.saveLastFigure(figure)
     }
+
+    // public whichCellsUnderAttack() {
+    //     this.cellsUnderAttack = []
+    //     const cellsWithFigure = this.board.cells.flat().filter(el =>  el?.figure && el.figure?.color !== this.figure?.color)
+    //
+    //     cellsWithFigure.forEach(figure => {
+    //         this.board.cells.flat().forEach(cell => {
+    //             if (figure.figure?.canMove(cell, true)) {
+    //                 if (!this.cellsUnderAttack.find(el => el === cell)) this.cellsUnderAttack.push(cell)
+    //             }
+    //         })
+    //     })
+    //
+    // }
+    //
+    // public haveCells() {
+    //     const king = this.board.cells.flat().find(el => el.figure?.name === FigureNames.KING)
+    //     const av = []
+    //     this.board.cells.flat().forEach(el => {
+    //         if(king?.figure?.canMove(el)) {
+    //             av.push(el)
+    //         }
+    //     })
+    //
+    //     return av.length
+    // }
+
+
 
     public moveFigure(targetCell: CellModel) {
         if (this?.figure?.canMove(targetCell)) {
             targetCell.setFigure(this.figure)
             this.figure.moveFigure(targetCell)
             this.figure = null;
-
         }
 
     }

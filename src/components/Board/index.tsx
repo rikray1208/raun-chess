@@ -17,8 +17,8 @@ const Board: FC<BoardProps> = ({board, setBoard, player, swapPlayer}) => {
 
     function click(currentCell: CellModel) {
         if(selectedCell && selectedCell !== currentCell && selectedCell.figure?.canMove(currentCell)) {
-            selectedCell.moveFigure(currentCell);
-            swapPlayer()
+                                                                                                                                                                                                                                                                                                                    selectedCell.moveFigure(currentCell);
+                                                                                                                                                                                                                                                                                                                    swapPlayer()
             setSelectedCell(null);
 
         } else   {

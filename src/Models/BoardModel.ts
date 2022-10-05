@@ -6,13 +6,10 @@ import {Knight} from "./figures/Knight";
 import {Pawn} from "./figures/Pawn";
 import {Queen} from "./figures/Queen";
 import {Rook} from "./figures/Rook";
-import {Figure} from "./figures/Figure";
 
 
 export class BoardModel {
     cells: CellModel[][] = []
-    lastFigure: Figure | null = null
-    lastAvailableCells: CellModel[] = []
 
     public initCells() {
         for (let i = 0; i < 8; i++) {
@@ -50,13 +47,6 @@ export class BoardModel {
 
     public getCell(i: number, j: number): CellModel {
         return this.cells[i][j]
-    }
-
-
-    public saveLastFigure(figure: Figure) {
-        this.lastFigure = figure
-        const arrCells = this.cells.flat()
-        this.lastAvailableCells = arrCells.filter(el => this.lastFigure?.canMove(el))
     }
 
     private addBishop() {

@@ -12,13 +12,13 @@ export class Queen extends Figure {
         this.image = color === Colors.WHITE ? whiteIcon : blackIcon
     }
 
-    canMove(targetCell: CellModel): boolean {
+    canMove(targetCell: CellModel, flag: boolean): boolean {
 
         if (!super.canMove(targetCell)) {
             return false
         }
 
-        if (this.cell.isEmptyVertical(targetCell) || this.cell.isEmptyHorizontal(targetCell) || this.cell.isEmptyDiagonal(targetCell)) {
+        if (this.cell.isEmptyVertical(targetCell, flag) || this.cell.isEmptyHorizontal(targetCell, flag) || this.cell.isEmptyDiagonal(targetCell, flag)) {
             return true;
         }
 
